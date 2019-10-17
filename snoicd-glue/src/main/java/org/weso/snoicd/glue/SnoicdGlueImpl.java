@@ -1,9 +1,9 @@
 package main.java.org.weso.snoicd.glue;
 
 import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueJob;
-import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueJobExecutorManager;
+import main.java.org.weso.snoicd.glue.executor.SnoicdGlueJobExecutorManager;
 
-public class SnoicdGlueImpl implements SnoicdGlue {
+final public class SnoicdGlueImpl implements SnoicdGlue {
 
     private final SnoicdGlueJobExecutorManager jobsManager;
 
