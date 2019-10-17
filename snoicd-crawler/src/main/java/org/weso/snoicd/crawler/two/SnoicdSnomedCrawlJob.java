@@ -1,16 +1,13 @@
 package org.weso.snoicd.crawler.two;
 
 import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueAbstractJob;
-import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueJobScheduller;
-import org.bson.Document;
+import main.java.org.weso.snoicd.glue.scheduller.SnoicdGlueJobScheduller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.weso.snoicd.crawler.StartUp;
 import org.weso.snoicd.crawler.types.AbstractTerminologyNode;
-import org.weso.snoicd.crawler.types.icd.ICDVersion;
-import org.weso.snoicd.crawler.types.icd.IcdNode;
 import org.weso.snoicd.crawler.types.snomed.SnomedNode;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -24,15 +21,11 @@ public class SnoicdSnomedCrawlJob extends SnoicdGlueAbstractJob {
 
     private final String pathToFileToCrawl;
     private JSONArray arrayOfICD9NodesInFile;
+    private Thread jobThread;
 
     public SnoicdSnomedCrawlJob(String jobIdentifier, String pathToFileToCrawl) {
         super(jobIdentifier);
         this.pathToFileToCrawl = pathToFileToCrawl;
-    }
-
-    @Override
-    public SnoicdGlueJobScheduller getScheduller() {
-        throw new NotImplementedException();
     }
 
     @Override
@@ -44,6 +37,22 @@ public class SnoicdSnomedCrawlJob extends SnoicdGlueAbstractJob {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void executeJob() {
+        jobThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    loadFileToCrawlInJSONArray();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void loadFileToCrawlInJSONArray() throws IOException, ParseException {
@@ -76,5 +85,10 @@ public class SnoicdSnomedCrawlJob extends SnoicdGlueAbstractJob {
 
             StartUp._nodes.put(abstractNode.getConceptID(), abstractNode);
         }
+    }
+
+    @Override
+    public void abortJob() {
+        this.jobThread.interrupt();
     }
 }

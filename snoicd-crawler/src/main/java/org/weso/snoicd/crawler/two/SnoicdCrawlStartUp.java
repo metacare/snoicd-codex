@@ -26,7 +26,6 @@ public class SnoicdCrawlStartUp {
                         "C:\\git\\snoicd-codex\\data\\concepts.json")
         );
 
-        glue.executeAllJobs();
-        glue.waitUntillAllJobsFinished();
+        glue.run();
     }
 }

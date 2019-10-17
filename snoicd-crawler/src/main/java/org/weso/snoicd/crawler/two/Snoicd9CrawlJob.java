@@ -1,7 +1,6 @@
 package org.weso.snoicd.crawler.two;
 
 import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueAbstractJob;
-import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueJobScheduller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,7 +9,6 @@ import org.weso.snoicd.crawler.StartUp;
 import org.weso.snoicd.crawler.types.AbstractTerminologyNode;
 import org.weso.snoicd.crawler.types.icd.ICDVersion;
 import org.weso.snoicd.crawler.types.icd.IcdNode;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,6 +18,7 @@ public class Snoicd9CrawlJob extends SnoicdGlueAbstractJob {
 
     private final String pathToFileToCrawl;
     private JSONArray arrayOfICD9NodesInFile;
+    private Thread jobThread;
 
     public Snoicd9CrawlJob(String jobIdentifier, String pathToFileToCrawl) {
         super(jobIdentifier);
@@ -27,19 +26,20 @@ public class Snoicd9CrawlJob extends SnoicdGlueAbstractJob {
     }
 
     @Override
-    public SnoicdGlueJobScheduller getScheduller() {
-        throw new NotImplementedException();
-    }
+    protected void executeJob() {
 
-    @Override
-    public void run() {
-        try {
-            loadFileToCrawlInJSONArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        jobThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    loadFileToCrawlInJSONArray();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void loadFileToCrawlInJSONArray() throws IOException, ParseException {
@@ -64,5 +64,10 @@ public class Snoicd9CrawlJob extends SnoicdGlueAbstractJob {
 
             StartUp._nodes.put(abstractNode.getConceptID(), abstractNode);
         }
+    }
+
+    @Override
+    public void abortJob() {
+        this.jobThread.interrupt();
     }
 }
