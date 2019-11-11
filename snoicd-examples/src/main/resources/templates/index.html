@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head"/>
+
+<body>
+<nav th:replace="fragments/nav"/>
+<div class="container">
+    <div class="container">
+        <input type="text"  id="input">
+        <span>
+	        <button id="button-id" type="button">Search</button>
+	    </span>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#input').autocomplete({
+                source : '/suggestions'
+            });
+        });
+    </script>
+
+</div>
+<footer th:replace="fragments/footer"/>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#resources a:first').addClass('active');
+    });
+</script>
+
+</html>
