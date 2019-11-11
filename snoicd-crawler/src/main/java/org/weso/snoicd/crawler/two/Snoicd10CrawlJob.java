@@ -1,6 +1,5 @@
 package org.weso.snoicd.crawler.two;
 
-import main.java.org.weso.snoicd.glue.jobs.SnoicdGlueAbstractJob;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class Snoicd10CrawlJob extends SnoicdGlueAbstractJob {
+public class Snoicd10CrawlJob extends Thread {
 
     private final String pathToFileToCrawl;
     private JSONArray arrayOfICD9NodesInFile;
@@ -26,20 +25,15 @@ public class Snoicd10CrawlJob extends SnoicdGlueAbstractJob {
     }
 
     @Override
-    protected void executeJob() {
+    public void run() {
 
-        jobThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    loadFileToCrawlInJSONArray();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        try {
+            loadFileToCrawlInJSONArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadFileToCrawlInJSONArray() throws IOException, ParseException {
@@ -64,10 +58,5 @@ public class Snoicd10CrawlJob extends SnoicdGlueAbstractJob {
 
             StartUp._nodes.put(abstractNode.getConceptID(), abstractNode);
         }
-    }
-
-    @Override
-    public void abortJob() {
-        this.jobThread.interrupt();
     }
 }
