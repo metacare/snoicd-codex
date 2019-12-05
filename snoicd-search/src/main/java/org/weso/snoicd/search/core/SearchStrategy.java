@@ -14,5 +14,5 @@ public interface SearchStrategy {
      */
     Set<Concept> getResult() throws IllegalStateException;
 
-    void setQuery( String query );
+    void setQuery(String query);
 }

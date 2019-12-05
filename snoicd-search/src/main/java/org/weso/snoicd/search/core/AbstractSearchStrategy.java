@@ -23,10 +23,10 @@ public abstract class AbstractSearchStrategy extends Thread implements SearchStr
 
     @Override
     public Set<Concept> getResult() throws IllegalStateException {
-        if(!isResultComputed)
+        if (!isResultComputed)
             throw new IllegalStateException("The result has not been computed");
 
-        if(!isResultReaded) {
+        if (!isResultReaded) {
             try {
                 this.join();
             } catch (InterruptedException e) {

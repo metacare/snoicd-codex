@@ -18,7 +18,6 @@ import static org.weso.snoicd.core.util.StringUtilsKt.normalize;
 
 /**
  * Instance of DescriptionIndex.java
- *
  */
 public class DescriptionIndex implements IndexEngine {
 

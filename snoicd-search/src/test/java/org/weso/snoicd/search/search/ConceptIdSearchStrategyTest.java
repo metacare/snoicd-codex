@@ -34,7 +34,7 @@ public class ConceptIdSearchStrategyTest {
     public void allFieldsSearchTest() {
         stats.put("conceptIdInitTime", System.nanoTime());
 
-        for(int i = 0; i < iterationsPerSearch; i ++) {
+        for (int i = 0; i < iterationsPerSearch; i++) {
             result = smokeSearchApp.executeQuery(new AllFieldsSearchStrategy(BigTablePersistenceImpl.instance), "Barré");
         }
 
@@ -42,35 +42,35 @@ public class ConceptIdSearchStrategyTest {
         System.out.println("--- ALL FIELDS TEST ---");
         printResult(result);
 
-        System.out.println("Time elapsed: " + ((stats.get("conceptIdEndTime").longValue() - stats.get("conceptIdInitTime").longValue()) /1000000));
+        System.out.println("Time elapsed: " + ((stats.get("conceptIdEndTime").longValue() - stats.get("conceptIdInitTime").longValue()) / 1000000));
     }
 
     @Test
     public void conceptIdSearchTest() {
         stats.put("conceptIdInitTime", System.nanoTime());
 
-        for(int i = 0; i < iterationsPerSearch; i ++) {
+        for (int i = 0; i < iterationsPerSearch; i++) {
             result = smokeSearchApp.executeQuery(new ConceptIDSearchStrategy(BigTablePersistenceImpl.instance), SNOMED_FEVER_CODE);
         }
 
         stats.put("conceptIdEndTime", System.nanoTime());
         System.out.println("--- CONCEPT TEST ---");
         printResult(result);
-        System.out.println("Time elapsed: " + ((stats.get("conceptIdEndTime").longValue() - stats.get("conceptIdInitTime").longValue()) /1000000));
+        System.out.println("Time elapsed: " + ((stats.get("conceptIdEndTime").longValue() - stats.get("conceptIdInitTime").longValue()) / 1000000));
     }
 
     @Test
     public void descriptionsSearchTest() {
         stats.put("conceptIdInitTime", System.nanoTime());
 
-        for(int i = 0; i < iterationsPerSearch; i ++) {
+        for (int i = 0; i < iterationsPerSearch; i++) {
             result = smokeSearchApp.executeQuery(new DescriptionSearchStrategy(BigTablePersistenceImpl.instance), SNOMED_FEVER_DESCRIPTION);
         }
 
         stats.put("conceptIdEndTime", System.nanoTime());
         System.out.println("--- DESCRIPTIONS TEST ---");
         printResult(result);
-        System.out.println("Time elapsed: " + ((long)(stats.get("conceptIdEndTime").longValue() - stats.get("conceptIdInitTime").longValue()) /1000000));
+        System.out.println("Time elapsed: " + ((long) (stats.get("conceptIdEndTime").longValue() - stats.get("conceptIdInitTime").longValue()) / 1000000));
     }
 
     private void printResult(ResponseToQuery rtq) {

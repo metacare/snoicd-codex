@@ -1,4 +1,4 @@
-package types;
+package org.weso.snoicd.core;
 
 import TestKit.SmokeTest;
 import org.junit.Test;

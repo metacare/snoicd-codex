@@ -8,7 +8,6 @@ public class SnoicdServerMetricsManager {
     private final static ConcurrentMap<String, Object> metricsMap = new ConcurrentHashMap<>();
 
     /**
-     *
      * @return
      */
     public ConcurrentMap getMetrics() {
@@ -16,7 +15,6 @@ public class SnoicdServerMetricsManager {
     }
 
     /**
-     *
      * @param metricKey
      * @return
      */
@@ -25,7 +23,6 @@ public class SnoicdServerMetricsManager {
     }
 
     /**
-     *
      * @param metricKey
      * @param value
      */

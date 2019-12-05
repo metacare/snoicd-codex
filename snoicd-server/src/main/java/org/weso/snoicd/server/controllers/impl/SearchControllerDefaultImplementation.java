@@ -31,8 +31,8 @@ public class SearchControllerDefaultImplementation implements SearchControllerOp
                 () -> {
                     output.setResult(
                             new ResponseEntity<ResponseToQuery>(
-                                new SearchExecutorService(filter).execute(query),
-                                HttpStatus.OK));
+                                    new SearchExecutorService(filter).execute(query),
+                                    HttpStatus.OK));
                 }
         );
 

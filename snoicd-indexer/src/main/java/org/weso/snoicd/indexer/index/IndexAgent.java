@@ -3,6 +3,7 @@ package org.weso.snoicd.indexer.index;
 import org.weso.snoicd.indexer.StartUp;
 
 import org.weso.snoicd.core.Concept;
+
 import java.util.List;
 
 /**
@@ -14,9 +15,9 @@ public class IndexAgent extends Thread {
     private int startPosition, endPosition;
 
     /**
-     * @param concepts is the full set of concepts to index.
+     * @param concepts      is the full set of concepts to index.
      * @param startPosition is where the agent starts to index.
-     * @param endPosition is the position where the agent stops indexing.
+     * @param endPosition   is the position where the agent stops indexing.
      */
     public IndexAgent(List<Concept> concepts, int startPosition, int endPosition) {
         this.concepts = concepts;

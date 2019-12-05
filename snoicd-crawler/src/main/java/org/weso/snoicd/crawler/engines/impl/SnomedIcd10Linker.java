@@ -7,21 +7,21 @@ import org.weso.snoicd.crawler.types.AbstractTerminologyNode;
 
 public class SnomedIcd10Linker extends AbstractCrawler {
 
-    public SnomedIcd10Linker(String uri, int port, String dbName ) {
-        super( uri, port, dbName );
+    public SnomedIcd10Linker(String uri, int port, String dbName) {
+        super(uri, port, dbName);
     }
 
     @Override
     void specificCrawl() {
         // Getting the snomed collection.
-        MongoCollection<Document> coll = super.hDB.getCollection( "snomed-icd10" );
+        MongoCollection<Document> coll = super.hDB.getCollection("snomed-icd10");
 
-        for(Document d : coll.find()) {
+        for (Document d : coll.find()) {
 
             Object snomedCodeO = d.get("conceptId");
             Object icd10CodeO = d.get("mapTarget");
 
-            if(snomedCodeO == null || icd10CodeO == null)
+            if (snomedCodeO == null || icd10CodeO == null)
                 continue;
 
             String snomedCode = snomedCodeO.toString();
@@ -30,12 +30,12 @@ public class SnomedIcd10Linker extends AbstractCrawler {
 
             AbstractTerminologyNode node = StartUp._nodes.get(snomedCode);
 
-            if(node != null)
+            if (node != null)
                 node.getTranslationNodesIds().add(icd10Code);
 
             node = StartUp._nodes.get(icd10Code);
 
-            if(node != null)
+            if (node != null)
                 node.getTranslationNodesIds().add(snomedCode);
         }
     }

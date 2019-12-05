@@ -38,7 +38,7 @@ public class SnoicdSearchDefaultImpl implements SnoicdSearch {
      */
     @Override
     public boolean loadConceptsInMemory() throws IllegalStateException {
-        if(areConceptsLoaded) throw new IllegalStateException("The concepts are already loaded in memory");
+        if (areConceptsLoaded) throw new IllegalStateException("The concepts are already loaded in memory");
 
         WarmUpMemory warmUpMemoryObject = new BigTableWarmUpMemoryImpl(
                 this.pathToConceptIdIndex,

@@ -5,7 +5,7 @@
  * Licensed under GNU General Public License v3.0.
  *
  * See /LICENSE for license information.
- * 
+ *
  */
 package org.weso.snoicd.crawler.types.snomed;
 
@@ -13,8 +13,8 @@ import org.weso.snoicd.crawler.types.AbstractTerminologyNode;
 
 /**
  * Instance of SnomedSimpleNode.java
- * 
- * @author 
- * @version 
+ *
+ * @author
  */
-public class SnomedSimpleNode extends AbstractTerminologyNode {}
+public class SnomedSimpleNode extends AbstractTerminologyNode {
+}

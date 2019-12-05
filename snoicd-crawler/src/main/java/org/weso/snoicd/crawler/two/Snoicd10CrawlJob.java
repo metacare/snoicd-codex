@@ -46,7 +46,7 @@ public class Snoicd10CrawlJob extends Thread {
         Iterator nodesIterator = arrayOfICD9NodesInFile.iterator();
         AbstractTerminologyNode abstractNode;
 
-        while(nodesIterator.hasNext()) {
+        while (nodesIterator.hasNext()) {
             JSONObject node = (JSONObject) nodesIterator.next();
 
             abstractNode = new IcdNode();

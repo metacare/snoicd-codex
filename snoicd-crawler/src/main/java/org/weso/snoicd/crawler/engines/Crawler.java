@@ -5,18 +5,17 @@
  * Licensed under GNU General Public License v3.0.
  *
  * See /LICENSE for license information.
- * 
+ *
  */
 package org.weso.snoicd.crawler.engines;
 
 /**
  * Instance of Crawler.java
- * 
- * @author 
- * @version 
+ *
+ * @author
  */
 @FunctionalInterface
 public interface Crawler {
 
-	public void crawl();
+    public void crawl();
 }

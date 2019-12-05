@@ -28,12 +28,12 @@ public class SnoicdCrawlStartUp {
         initCrawl();
 
         // Waits till all crawlers have finished.
-       joinCrawl();
+        joinCrawl();
 
-       // Links all the terminologies.
-       linkTerminologies();
+        // Links all the terminologies.
+        linkTerminologies();
 
-       // Writes the result in the output file.
+        // Writes the result in the output file.
         writeOutpoutFile();
     }
 
@@ -79,14 +79,14 @@ public class SnoicdCrawlStartUp {
     private static void writeOutpoutFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE));
         writer.append("[");
-        StartUp._nodes.forEach( (k, v ) -> {
+        StartUp._nodes.forEach((k, v) -> {
             try {
-                writer.append( new Gson().toJson( v ) );
-                writer.append( ",\n" );
+                writer.append(new Gson().toJson(v));
+                writer.append(",\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } );
+        });
         writer.append("]");
         writer.close();
     }

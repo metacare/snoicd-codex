@@ -2,13 +2,26 @@ package org.weso.snoicd.core.util
 
 import java.text.Normalizer
 
-fun String.normalize() : String {
+/**
+ * Normalizes an string by:
+ *      "-|/" -> " " (white space).
+ *      ".,()[]" -> "" (just removing).
+ *      (non-ascii characters) -> "" (just removing).
+ *      all -> to lower case.
+ */
+fun String.normalize(): String {
+
+    // Transform the string by removing "-|/", and ".,()[]".
     var ret = this.replace("-".toRegex(), " ")
-    ret = ret.replace(("/").toRegex(), " ")
-    ret = ret.replace(("[.,]").toRegex(), "")
-    ret = ret.replace(("[()]").toRegex(), "")
-    ret = ret.replace(("[\\[\\]]").toRegex(), "")
-    ret = Normalizer.normalize(ret, Normalizer.Form.NFD).replace("[^\\p{ASCII}]".toRegex(), "")
-    ret = ret.toLowerCase();
+            .replace(("/").toRegex(), " ")
+            .replace(("[.,]").toRegex(), "")
+            .replace(("[()]").toRegex(), "")
+            .replace(("[\\[\\]]").toRegex(), "")
+
+    // Transform non ascii characters to ascii ones or remove them.
+    ret = Normalizer.normalize(ret, Normalizer.Form.NFD)
+            .replace("[^\\p{ASCII}]".toRegex(), "")
+            .toLowerCase()
+
     return ret
 }

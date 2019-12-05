@@ -5,7 +5,7 @@
  * Licensed under GNU General Public License v3.0.
  *
  * See /LICENSE for license information.
- * 
+ *
  */
 package org.weso.snoicd.crawler.engines.impl;
 
@@ -25,73 +25,73 @@ import java.util.List;
 
 /**
  * Instance of SnomedCrawler.java
- * 
+ *
  * @author Guillermo Facundo Colunga
  * @version 0.1
  */
 public class SnomedCrawler extends AbstractCrawler {
 
-	/*
-	 * Allocates a [] object and initializes it so that it represents
-	 */
-	public SnomedCrawler( String uri, int port, String dbName ) {
-		super( uri, port, dbName );
-	}
+    /*
+     * Allocates a [] object and initializes it so that it represents
+     */
+    public SnomedCrawler(String uri, int port, String dbName) {
+        super(uri, port, dbName);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.weso.snoicd.crawler.engines.AbstractCrawler#specificCrawl()
-	 */
-	@Override
-	void specificCrawl() {
-		// Getting the snomed collection.
-		MongoCollection<Document> coll = super.hDB.getCollection( "snomed" );
+    /*
+     * (non-Javadoc)
+     * @see org.weso.snoicd.crawler.engines.AbstractCrawler#specificCrawl()
+     */
+    @Override
+    void specificCrawl() {
+        // Getting the snomed collection.
+        MongoCollection<Document> coll = super.hDB.getCollection("snomed");
 
-		AbstractTerminologyNode node;
+        AbstractTerminologyNode node;
 
-		int iterations = 1;
-		
-		for (Document doc : coll.find()) {
+        int iterations = 1;
 
-			if(iterations %100 == 0) System.out.println(iterations);
-			if(iterations %10000 == 0) System.out.println(iterations);
-			
-			// Create the node.
-			node = new SnomedNode();
-			node.setTerminologyName("SNOMED");
-			
-			// Set its ID
-			node.setConceptID( doc.get( "conceptId" ).toString() );
-			
-			// Add the description found.
-			//node.getDescriptions().add(doc.get( "DESCRIPTION" ).toString());
+        for (Document doc : coll.find()) {
 
-			List<Document> descriptions = (ArrayList)doc.get("descriptions");
+            if (iterations % 100 == 0) System.out.println(iterations);
+            if (iterations % 10000 == 0) System.out.println(iterations);
 
-			for(Document d : descriptions) {
-				node.getDescriptions().add(d.get("term").toString());
-			}
+            // Create the node.
+            node = new SnomedNode();
+            node.setTerminologyName("SNOMED");
 
-			List<Document> relationships = (ArrayList)doc.get("relationships");
+            // Set its ID
+            node.setConceptID(doc.get("conceptId").toString());
 
-			if(relationships!= null) {
-				for(Document r : relationships) {
-					String relationType = ((Document)r.get("type")).get("preferredTerm").toString();
-					String endOfRelationId = r.get("sourceId").toString();
+            // Add the description found.
+            //node.getDescriptions().add(doc.get( "DESCRIPTION" ).toString());
 
-					((SnomedNode) node).getRelations().add(
-							new SnomedRelation(relationType, endOfRelationId));
-				}
-			}
+            List<Document> descriptions = (ArrayList) doc.get("descriptions");
 
-			//System.out.println(((ArrayList)doc.get("descriptions")).get(0).getClass());
+            for (Document d : descriptions) {
+                node.getDescriptions().add(d.get("term").toString());
+            }
 
-			// Add the relations of the snomed node.
-			//((SnomedNode) node).getRelations().add( new SnomedRelation("new snomed relation", null));
-			
-			StartUp._nodes.put( node.getConceptID(), node );
+            List<Document> relationships = (ArrayList) doc.get("relationships");
 
-			iterations++;
-		}
-	}
+            if (relationships != null) {
+                for (Document r : relationships) {
+                    String relationType = ((Document) r.get("type")).get("preferredTerm").toString();
+                    String endOfRelationId = r.get("sourceId").toString();
+
+                    ((SnomedNode) node).getRelations().add(
+                            new SnomedRelation(relationType, endOfRelationId));
+                }
+            }
+
+            //System.out.println(((ArrayList)doc.get("descriptions")).get(0).getClass());
+
+            // Add the relations of the snomed node.
+            //((SnomedNode) node).getRelations().add( new SnomedRelation("new snomed relation", null));
+
+            StartUp._nodes.put(node.getConceptID(), node);
+
+            iterations++;
+        }
+    }
 }

@@ -10,10 +10,4 @@ import java.util.ArrayList
  */
 data class SimpleConcept(var code: String = "",
                          var descriptions: List<String> = ArrayList(),
-                         var terminologyName: String = "") : Serializable {
-
-    companion object {
-
-        private val serialVersionUID = 1L
-    }
-}
+                         var terminologyName: String = "") : Serializable

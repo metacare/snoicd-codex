@@ -23,7 +23,7 @@ html {
     margin-bottom: 1.5em;
 }
 
-.controls>p {
+.controls > p {
     padding: .25em 0;
 }
 
@@ -66,12 +66,12 @@ html {
     margin-right: 50px;
 }
 
-.navbar-nav>li>a {
+.navbar-nav > li > a {
     padding: 10px 15px;
     color: #fff !important;
 }
 
-.nav>li>a:hover {
+.nav > li > a:hover {
     background-color: #232f3e;
     color: #f90 !important;
 }
@@ -156,9 +156,9 @@ b {
 }
 
 .hero-legal-text-row {
-    font-size: 12px!important;
-    line-height: 1.5!important;
-    margin-top: 18px!important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin-top: 18px !important;
 }
 
 .hero-manager-logo {
@@ -224,8 +224,8 @@ h2 {
 }
 
 .pull-right {
-    display: block!important;
-    float: right!important;
+    display: block !important;
+    float: right !important;
     margin-top: -10px;
 }
 
@@ -325,12 +325,12 @@ h2 {
 
 .vhf-channel {
     border-left-width: 5px;
-    border-left: 10px solid rgba(128,255,255,.8);
+    border-left: 10px solid rgba(128, 255, 255, .8);
 }
 
 .uhf-channel {
     border-left-width: 5px;
-    border-left: 10px solid rgba(224,128,128,.8);
+    border-left: 10px solid rgba(224, 128, 128, .8);
 }
 
 .hero-label {
@@ -408,11 +408,11 @@ h2 {
     border-bottom-left-radius: 0;
 }
 
-.controls>textarea {
+.controls > textarea {
     min-height: 100px !important;
 }
 
-.controls>input[type="text"] textarea {
+.controls > input[type="text"] textarea {
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);

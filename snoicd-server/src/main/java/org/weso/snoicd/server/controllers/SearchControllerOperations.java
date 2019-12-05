@@ -12,7 +12,6 @@ import java.util.Set;
 public interface SearchControllerOperations {
 
     /**
-     *
      * @return
      */
     DeferredResult<ResponseEntity<ResponseToQuery>> handleSearchQuery(

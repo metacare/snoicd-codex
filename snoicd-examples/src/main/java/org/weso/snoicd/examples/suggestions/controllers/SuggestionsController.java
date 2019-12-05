@@ -19,14 +19,15 @@ import java.util.List;
 public class SuggestionsController {
 
     @RequestMapping(value = "suggestions", method = RequestMethod.GET)
-    public @ResponseBody List<String> getSuggestions(HttpServletRequest request) {
+    public @ResponseBody
+    List<String> getSuggestions(HttpServletRequest request) {
 
         List<String> suggestions = new ArrayList<>();
 
         AbstractSearchStrategy search = new AllFieldsSearchStrategy(BigTablePersistenceImpl.instance);
         search.setQuery(request.getParameter("term"));
         search.run();
-        for(Concept c : search.getResult()) {
+        for (Concept c : search.getResult()) {
             suggestions.add(c.getDescriptions().get(0));
         }
 
@@ -34,5 +35,7 @@ public class SuggestionsController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getIndexPage() { return "index"; }
+    public String getIndexPage() {
+        return "index";
+    }
 }

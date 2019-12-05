@@ -8,21 +8,21 @@ import org.weso.snoicd.crawler.types.AbstractTerminologyNode;
 
 public class SnomedIcd9Linker extends AbstractCrawler {
 
-    public SnomedIcd9Linker(String uri, int port, String dbName ) {
-        super( uri, port, dbName );
+    public SnomedIcd9Linker(String uri, int port, String dbName) {
+        super(uri, port, dbName);
     }
 
     @Override
     void specificCrawl() {
         // Getting the snomed collection.
-        MongoCollection<Document> coll = super.hDB.getCollection( "snomed-icd9" );
+        MongoCollection<Document> coll = super.hDB.getCollection("snomed-icd9");
 
-        for(Document d : coll.find()) {
+        for (Document d : coll.find()) {
 
             Object snomedCodeO = d.get("SNOMED_CID");
             Object icd9CodeO = d.get("ICD_CODE");
 
-            if(snomedCodeO == null || icd9CodeO == null)
+            if (snomedCodeO == null || icd9CodeO == null)
                 continue;
 
             String snomedCode = snomedCodeO.toString();
@@ -31,12 +31,12 @@ public class SnomedIcd9Linker extends AbstractCrawler {
 
             AbstractTerminologyNode node = StartUp._nodes.get(snomedCode);
 
-            if(node != null)
+            if (node != null)
                 node.getTranslationNodesIds().add(icd9Code);
 
             node = StartUp._nodes.get(icd9Code);
 
-            if(node != null)
+            if (node != null)
                 node.getTranslationNodesIds().add(snomedCode);
         }
     }
