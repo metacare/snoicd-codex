@@ -17,12 +17,14 @@
 
     <modules>
         <!-- Keep in alphabetical order -->
+
         <module>snoicd-core</module>
-        <module>snoicd-crawler</module>
-        <module>snoicd-search</module>
+        <module>snoicd-normalizer</module>
+        <module>snoicd-linker</module>
         <module>snoicd-indexer</module>
-        <module>snoicd-server</module>
-        <module>snoicd-examples</module>
+        <module>snoicd-search</module>
+        <module>snoicd-rest-server</module>
+        <module>snoicd-core</module>
     </modules>
 
 </project>

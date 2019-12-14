@@ -1,1 +1,0 @@
-package org.weso.snoicd.search.controllers;
