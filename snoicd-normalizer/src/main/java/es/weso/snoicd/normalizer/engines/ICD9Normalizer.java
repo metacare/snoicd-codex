@@ -14,7 +14,7 @@ import java.util.Iterator;
 public class ICD9Normalizer extends AbstractNormalizer {
 
     private final static String TERMINOLOGY_NAME = "ICD_9";
-    private final static String CODE_KEYWORK = "PROCEDURE CODE";
+  private final static String CODE_KEYWORD = "\uFEFFPROCEDURE CODE";
     private final static String DESCRIPTIONS_KEYWORD = "LONG DESCRIPTION";
 
     private JSONArray arrayOfNodes;
@@ -49,7 +49,7 @@ public class ICD9Normalizer extends AbstractNormalizer {
 
             iteratorConcept = new Concept();
 
-            iteratorConcept.setCode(node.get(CODE_KEYWORK).toString());
+            iteratorConcept.setCode(node.get(CODE_KEYWORD).toString());
             iteratorConcept.setTerminologyName(TERMINOLOGY_NAME);
 
             iteratorConcept.getDescriptions().add(node.get(DESCRIPTIONS_KEYWORD).toString());

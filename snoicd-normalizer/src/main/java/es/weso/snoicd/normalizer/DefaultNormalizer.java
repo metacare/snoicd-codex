@@ -31,7 +31,7 @@ public final class DefaultNormalizer implements Normalizer {
 
     private void normalize() {
         List<Thread> threads = new ArrayList(3);
-        for(Runnable normalizer : normalizers) {
+        /*for(Runnable normalizer : normalizers) {
             Thread tmpThread = new Thread(normalizer);
             threads.add(tmpThread);
             tmpThread.start();
@@ -43,6 +43,14 @@ public final class DefaultNormalizer implements Normalizer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+
+        System.out.println("NORMALIZING SNOMED");
+        normalizers[0].run();
+        System.out.println("NORMALIZING ICD9");
+        normalizers[1].run();
+        System.out.println("NORMALIZING ICD10");
+        normalizers[2].run();
+        System.out.println("NORMALIZING FINISHED");
     }
 }

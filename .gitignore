@@ -86,3 +86,5 @@ participants0.iml
 participants_i2b.iml
 /.gradle/
 /build/
+
+data/snomed.json

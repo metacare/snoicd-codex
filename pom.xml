@@ -23,6 +23,7 @@
     <modules>
         <module>snoicd-core</module>
         <module>snoicd-normalizer</module>
+        <module>snoicd-linker</module>
     </modules>
 
     <dependencies>
