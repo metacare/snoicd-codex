@@ -25,6 +25,8 @@
         <module>snoicd-normalizer</module>
         <module>snoicd-linker</module>
         <module>snoicd-indexer</module>
+        <module>snoicd-search</module>
+        <module>snoicd-server</module>
     </modules>
 
     <dependencies>
