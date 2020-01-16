@@ -8,12 +8,8 @@ import java.util.stream.Stream;
 /** The interface Persistence. */
 public interface Persistence {
 
-  /**
-   * Load index.
-   *
-   * @param index the index
-   */
-  void loadIndex(Index index);
+
+  void loadIndexes(Index conceptsIndexedByCode, Index conceptsIndexedByDescription);
 
   /**
    * Find by concept code stream.

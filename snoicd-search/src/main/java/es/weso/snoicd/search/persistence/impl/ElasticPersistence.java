@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class ElasticPersistence implements Persistence {
     @Override
-    public void loadIndex(Index index) {
+    public void loadIndexes(Index conceptsIndexedByCode, Index conceptsIndexedByDescription) {
 
     }
 

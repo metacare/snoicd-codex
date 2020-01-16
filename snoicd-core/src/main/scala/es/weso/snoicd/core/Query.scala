@@ -49,5 +49,4 @@ trait Query {
    *         Either type.
    */
   def getResult(): Either[Exception, Stream[Concept]]
-
 }

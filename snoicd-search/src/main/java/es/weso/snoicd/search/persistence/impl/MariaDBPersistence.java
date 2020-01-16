@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class MariaDBPersistence implements Persistence {
 
     @Override
-    public void loadIndex(Index index) {
+    public void loadIndexes(Index conceptsIndexedByCode, Index conceptsIndexedByDescription) {
 
     }
 

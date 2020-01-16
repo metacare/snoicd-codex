@@ -3,9 +3,9 @@ package es.weso.snoicd.server;
 import es.weso.snoicd.core.Concept;
 import es.weso.snoicd.core.Query;
 import es.weso.snoicd.core.impl.DefaultQuery;
+import es.weso.snoicd.search.DefaultSearch;
 import es.weso.snoicd.search.Search;
-import es.weso.snoicd.search.engines.DefaultSearchEngine;
-import es.weso.snoicd.search.persistence.impl.InMemmoryPersistence;
+import es.weso.snoicd.search.persistence.impl.InMemoryPersistence;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @RequestMapping("/api")
 public class RESTControllerImpl implements RESTControllerOperations {
 
-    private Search searchEngine = new DefaultSearchEngine();
+    private Search searchEngine = new DefaultSearch(new InMemoryPersistence());
 
     @Override
     @GetMapping("/search")
