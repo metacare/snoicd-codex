@@ -9,11 +9,12 @@ public class DefaultLinkerTest {
 
     @Test
     public void shitTest() throws IOException, ParseException {
-        new DefaultLinker(
+        Linker linker = new DefaultLinker(
                 "../data/snomed.json",
                 "../data/icd9-en.json",
                 "../data/icd-10-en.json",
                 "../data/snomed-icd9-map.json",
-                "../data/snomed-icd10-map.json");
+                "../data/snomed-icd10-map.json"
+        );
     }
 }

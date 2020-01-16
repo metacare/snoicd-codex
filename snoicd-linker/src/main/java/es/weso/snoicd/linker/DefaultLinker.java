@@ -4,19 +4,19 @@ import es.weso.snoicd.core.Concept;
 import es.weso.snoicd.core.SimpleConcept;
 import es.weso.snoicd.normalizer.DefaultNormalizer;
 import es.weso.snoicd.normalizer.Normalizer;
-import org.apache.commons.lang3.ObjectUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DefaultLinker implements Linker {
@@ -29,7 +29,7 @@ public class DefaultLinker implements Linker {
 
     private final String snomedIcd9LinkerFile;
     private final String snomedIcd10LinkerFile;
-    private final Map<String, Concept> concepts;
+    private Map<String, Concept> concepts;
 
     private Normalizer normalizer;
     private JSONArray arrayOfICD9ConceptsToLink;
@@ -52,22 +52,29 @@ public class DefaultLinker implements Linker {
         normalizer = new DefaultNormalizer(snomedFile, icd9File, icd10File, null);
 
         // Add the normalized concepts to a map to start the link process.
-        normalizer.getNormalizedConceptsStream()
+        /*normalizer.getNormalizedConceptsStream()
                 .forEach(
                         concept -> {
                             concepts.put(concept.getCode(), concept);
                             //System.out.println("Processing stream -> " + concepts.size());
                         }
+                );*/
+
+        concepts = normalizer.getNormalizedConceptsStream()
+                .collect(
+                        Collectors.toMap(Concept::getCode, Function.identity())
                 );
+
+
 
         System.out.println("FILES NORMALIZED");
 
         // Initialization of the arrays
         System.out.println("LINKING ICD9");
-        linkConcepts(SNOMED_CODE, ICD9_CODE);
+        linkConcepts(SNOMED_CODE, ICD9_CODE, new FileReader(this.snomedIcd9LinkerFile));
 
         System.out.println("LINKING ICD10");
-        linkConcepts(SNOMED2_CODE, ICD10_CODE);
+        //linkConcepts(SNOMED2_CODE, ICD10_CODE, new FileReader(this.snomedIcd10LinkerFile));
     }
 
     @Override
@@ -75,9 +82,9 @@ public class DefaultLinker implements Linker {
         return concepts.values().parallelStream();
     }
 
-    private void linkConcepts(String snomedCodeKeyword, String icdCodeKeyword) throws IOException, ParseException {
+    private void linkConcepts(String snomedCodeKeyword, String icdCodeKeyword, FileReader file) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        Object obj = parser.parse(new FileReader(this.snomedIcd9LinkerFile));
+        Object obj = parser.parse(file);
 
         arrayOfICD9ConceptsToLink = (JSONArray) obj;
 

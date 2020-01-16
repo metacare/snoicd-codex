@@ -93,7 +93,7 @@ public class SnomedNormalizer extends AbstractNormalizer {
                 JsonObject obj = parser.getObject();
                 //System.out.println("Object -->" + obj);
                 //System.out.println(obj.get(CODE_KEYWORD));
-                auxConcept.setCode(obj.get(CODE_KEYWORD).toString());
+                auxConcept.setCode(obj.get(CODE_KEYWORD).toString().toLowerCase());
                 JsonArray descriptions = (JsonArray) obj.get(DESCRIPTIONS_KEYWORD);
                 for(JsonValue description : descriptions) {
                     //System.out.println(description.asJsonObject().get("term"));

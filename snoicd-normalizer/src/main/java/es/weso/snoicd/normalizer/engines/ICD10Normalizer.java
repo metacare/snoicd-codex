@@ -49,7 +49,7 @@ public class ICD10Normalizer extends AbstractNormalizer {
 
             iteratorConcept = new Concept();
 
-            iteratorConcept.setCode(node.get(CODE_KEYWORK).toString());
+            iteratorConcept.setCode(node.get(CODE_KEYWORK).toString().toLowerCase());
             iteratorConcept.setTerminologyName(TERMINOLOGY_NAME);
 
             iteratorConcept.getDescriptions().add(node.get(DESCRIPTIONS_KEYWORD).toString());
